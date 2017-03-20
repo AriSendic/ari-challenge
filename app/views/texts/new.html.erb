@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <h1 class="text-center">Create a new file:</h1>
+    <div class ="form-group"> 
+      <%= form_tag "/texts", method: :post, multipart: true do %>
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2">
+            <%= label_tag :title, "Title: " %>
+            <%= text_field_tag :title, nil, class: 'form-control' %>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2">
+            <%= label_tag :file, "File: " %>
+            <%= file_field_tag :file %>
+          </div>
+        </div>
+        <div class="row text-center">  
+          <%= submit_tag "Add file and get info", class: 'btn btn-primary' %>
+        </div>
+      <% end %> 
+    </div>
+   
+    <h1 class="text-center">Get info for an old file:</h1>
+    <div class ="form-group text-center"> 
+      <%= form_tag "/texts/show", method: :get do %>
+        <%= label_tag :select, "Select: " %>
+        <%= select_tag "select", options_for_select(@archive.collect {|p| [ p['title'], p['id'] ]}) %>
+        <div class="row text-center">  
+          <%= submit_tag "get info", class: 'btn btn-primary' %>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div>
+
